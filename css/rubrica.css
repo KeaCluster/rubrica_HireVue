@@ -1,0 +1,9 @@
+/* Estilo opcional para resaltar el botón seleccionado */
+.score-button.active {
+    background-color: #3498db;
+    color: #fff;
+}
+
+td.text-center.score-button:hover {
+    cursor: pointer;
+}

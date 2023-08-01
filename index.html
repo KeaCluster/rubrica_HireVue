@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/rubrica.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Rúbrica HireVue</title>
+</head>
+
+<body>
+    <p class="text-center fs-3 m-3 fw-bold">Rúbrica para HireVue</p>
+    <div class="m-3 p-3">
+        <table class="table table-striped table-hover table-bordered border-dark" id="rubrica">
+            <thead class="table-success table-bordered border-dark">
+                <tr>
+                    <th class="col-2 text-center" scope="col">Criterios de evaluación</th>
+                    <th class="col-2 text-center" scope="col">4. Si</th>
+                    <th class="col-2 text-center" scope="col">3. Tal vez Si</th>
+                    <th class="col-2 text-center" scope="col">2. Tal vez No</th>
+                    <th class="col-2 text-center" scope="col">1. No</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="text-center" scope="row">¿Has terminado tus estudios universitarios?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Si, titulado de estudios universitarios o me encuentro en proceso de titulación</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Servicio social o prácticas profesionales o sigue estudiando fuera del horario del bootcamp</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">Servicio social o prácticas profesionales en el mismo horario del bootcamp</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">Estudiando en el mismo horario del bootcamp. Tengo estudios de preparatoria</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Qué tipo de estudios cursaste?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Ingeniería en sistemas o TI</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Otro tipo de Ingenierías (Industrial, Ambiental, Biomédica, Geofísica, Diseño, etc..)</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">Otra área universitaria ( Administración, Música, Letras, Psicología, etc.)</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">Preparatoria o bachillerato</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Cuál es tu nivel de inglés?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">B2, C1, C2</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">B1</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">A2</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">A1</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Cuentas ya con conocimientos técnicos en algún lenguaje?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Si, seleccionó Java, JavaScript y/o React</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Si, seleccionó al menos HTML y CSS </td>
+                    <td class="text-center score-button" onclick="updateScore(2)">Si, seleccionó al menos Python o muy básicos</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">Ninguno</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Cuentas con equipo de cómputo e internet sin limitaciones de tiempo, cuenta con cámara y micrófono funcionando correctamente?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Cuento con equipo de cómputo en buen estado e internet ilimitado</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Mi equipo de cómputo no es tan nuevo y a veces se alenta un poco. Tengo internet sin restricción</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">Tengo equipo de cómputo, pero no tengo internet todo el tiempo</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">Tengo acceso a internet, pero no computadora ¿Podría Generation prestarme un equipo para el curso?</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Te comprometes a ser abiertx con las posibilidades laborales que puedas obtener?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Si, estoy abiertx a contemplar todos los esquemas de empleo. (Presencial o hibrido)</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Para mí solo es posible considerar trabajos remotos o muy flexibles</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">No me urge emplearme al terminar, quiero seguir aprendiendo. Mi prioridad es seguir estudiando</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">N/A</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Estás llevando algún tipo de seguimiento médico o de rehabilitación?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">No lleva seguimientos médicos o de rehabilitación</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Lleva algún seguimiento médico o de rehabilitación que no le imposibilita</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">Lleva algún seguimiento médico o de rehabilitación delicado</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">Su tratamiento médico o de rehabilitación se complica frecuentemente</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">¿Estás llevando algún tipo de seguimiento médico o de rehabilitación?</th>
+                    <td class="text-center score-button" onclick="updateScore(4)">Mark</td>
+                    <td class="text-center score-button" onclick="updateScore(3)">Otto</td>
+                    <td class="text-center score-button" onclick="updateScore(2)">@mdo</td>
+                    <td class="text-center score-button" onclick="updateScore(1)">@mdo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <p>Total de Puntaje: <span id="total-score">0</span></p>
+        <p>Recomendación: <span id="recomendacion"></span></p>
+    </div>
+
+    <script src="./js/rubrica.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
