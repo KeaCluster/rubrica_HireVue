@@ -1,12 +1,54 @@
 let TOTAL_SCORE = 0;
 let RESULT_ELEMENT = document.getElementById("total-score");
 let RECOMMEND_ELEMENT = document.getElementById("recomendacion");
+const tableBody = document.querySelector('tbody');
 const criteriaRow = {};
 
+// fetch data && create elements 
 
-for( const element of document.querySelectorAll('.score-button')) {
-    element.addEventListener('click', e => {
+fetch('data.json')
+    .then(res => res.json())
+    .then(data => {
 
+        data.forEach(data => {
+            // create elements
+            const row = document.createElement('tr');
+            const criteriaCell = document.createElement('th');
+
+            // add attributes/classes/values
+            criteriaCell.classList.add('text-center');
+            criteriaCell.setAttribute('scope', 'row');
+
+            // populate
+            criteriaCell.textContent = data.criteria;
+            row.appendChild(criteriaCell);
+
+            // nested loop
+            data.scores.forEach(score => {
+                // same logic as above
+                const scoreCell = document.createElement('td');
+
+                scoreCell.classList.add('text-center', 'score-button');
+                scoreCell.setAttribute('value', score.value);
+                scoreCell.textContent = score.text;
+
+                row.appendChild(scoreCell);
+            })
+
+            tableBody.appendChild(row);
+        })
+
+        // add event listener
+        tableBody.addEventListener('click', clickHandler);
+    })
+    .catch(err => console.error("Not working: ", err));
+
+
+
+const clickHandler = event => {
+    const element = event.target;
+
+    if (element && element.matches('.score-button')) {
         // get context of the selected row
         const row = element.parentNode.rowIndex
 
@@ -18,7 +60,7 @@ for( const element of document.querySelectorAll('.score-button')) {
         criteriaRow[row] = parseInt(element.getAttribute('value'));
 
         // reset sibling class
-        for( const sibling of element.parentNode.querySelectorAll('.score-button')) {
+        for (const sibling of element.parentNode.querySelectorAll('.score-button')) {
             sibling.classList.remove('active');
         }
 
@@ -36,16 +78,15 @@ for( const element of document.querySelectorAll('.score-button')) {
         // Populate / update elements
         RECOMMEND_ELEMENT.innerText = checkRecommend(FINAL_SCORE);
         RESULT_ELEMENT.innerText = FINAL_SCORE;
-
-    })
+    }
 }
 
 
 const checkRecommend = (score) => {
-    switch(true) {
-        case(score <= 1.5 && score >= 0):
-            return "No";         
-        case(score <= 2.5 && score >= 1.6):
+    switch (true) {
+        case (score <= 1.5 && score >= 0):
+            return "No";
+        case (score <= 2.5 && score >= 1.6):
             return "Tal vez no";
         case (score <= 3.5 && score >= 2.6):
             return "Tal vez si";
